@@ -6,7 +6,7 @@ import ProviderOnClickButton from '../components/ProviderOnClickButton';
 
 export default async function Login() {
   // const [providers, setProviders] = useState<any>(null);
-  let providers: any = await getProviders();
+  const providers: any = await getProviders();
 
   // (async () => {
   //   providers = await getProviders();
