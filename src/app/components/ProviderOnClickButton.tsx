@@ -7,7 +7,6 @@ type ProviderOnClickButtonProps = {
 };
 
 function ProviderOnClickButton({ provider }: any) {
-  console.log(provider);
   return (
     <button
       onClick={() => signIn(provider.id, { callbackUrl: '/' })}
