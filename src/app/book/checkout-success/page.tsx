@@ -1,41 +1,44 @@
-'use client';
+// 'use client';
+
+// サーバーサイドに書き換える
 
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+// import { useSearchParams } from 'next/navigation';
+// import React, { useEffect, useState } from 'react';
 
 type SearchParamsProps = {
   session_id: string;
 };
 
-function PurchaseSuccess() {
-  const searchParams = useSearchParams();
-  const sessionId = searchParams.get('session_id');
-  const [bookUrl, setBookUrl] = useState<string>('');
-  // const sessionId = searchParams.session_id;
-  // let bookUrl = '';
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/checkout/success`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ sessionId }),
-          }
-        );
-        const data = await res.json();
-        console.log(data);
-        setBookUrl(data.purchase.bookId);
-        // bookUrl = data.purchase.bookId;
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, []);
+function PurchaseSuccess({
+  searchParams,
+}: {
+  searchParams: SearchParamsProps;
+}) {
+  // const searchParams = useSearchParams();
+  // const sessionId = searchParams.get('session_id');
+  // const [bookUrl, setBookUrl] = useState<string>('');
+  const sessionId = searchParams.session_id;
+  let bookUrl = '';
+
+  (async () => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/checkout/success`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ sessionId }),
+        }
+      );
+      const data = await res.json();
+      bookUrl = data.purchase.bookId;
+    } catch (err) {
+      console.log(err);
+    }
+  })();
 
   return (
     <div className="flex items-center justify-center mt-20">
