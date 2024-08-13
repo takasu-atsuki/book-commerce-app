@@ -25,15 +25,14 @@ const Login = async () => {
         </div>
         <div className="mt-8 space-y-6">
           <h1>プロバーダーズはこちら</h1>
-          {providers &&
-            Object.values(providers).map((provider: any) => {
-              return (
-                <div className="text-center" key={provider.id}>
-                  <h2>あるはず。。。。</h2>
-                  <ProviderOnClickButton provider={provider} />
-                </div>
-              );
-            })}
+          {Object.values(providers!).map((provider: any) => {
+            return (
+              <div className="text-center" key={provider.id}>
+                <h2>あるはず。。。。</h2>
+                <ProviderOnClickButton provider={provider} />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
