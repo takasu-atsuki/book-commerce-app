@@ -4,6 +4,7 @@ import { getAllBooks } from './lib/microcms/client';
 import { BookType, PurchaseBook } from './types/types';
 import { nextAuthOptions } from './lib/next-auth/options';
 import { User } from '@prisma/client';
+import { usePurchaseBookId } from '@/hooks/usePurchaseBookIds';
 
 type Book = {
   id: string;
@@ -13,24 +14,10 @@ type Book = {
 };
 
 export default async function Home() {
-  const { contents } = await getAllBooks();
+  const { contents } = await getAllBooks(); //ISR
   const session = await getServerSession(nextAuthOptions);
   const user: User = session?.user as User;
-  let purchaseBookIds: string[];
-
-  if (user) {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/purchases/${user.id}`,
-      { cache: 'no-store' }
-    );
-    const purchasesData = await response.json();
-
-    purchaseBookIds = purchasesData.purchases.map(
-      (purchaseBook: PurchaseBook) => purchaseBook.bookId
-    );
-
-    console.log(purchaseBookIds);
-  }
+  const purchaseBookIds: string[] = await usePurchaseBookId(user);
 
   return (
     <>
@@ -43,6 +30,7 @@ export default async function Home() {
             key={book.id}
             book={book}
             isPurchased={purchaseBookIds?.includes(book.id)}
+            user={user}
           />
         ))}
       </main>
