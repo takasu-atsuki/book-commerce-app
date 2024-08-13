@@ -4,7 +4,7 @@ import { getProviders, signIn } from 'next-auth/react';
 import ProviderOnClickButton from '../components/ProviderOnClickButton';
 // import { useEffect, useState } from 'react';
 
-const Login = async () => {
+export default async function Login() {
   // const [providers, setProviders] = useState<any>(null);
   const providers = await getProviders();
 
@@ -41,6 +41,4 @@ const Login = async () => {
       </div>
     </div>
   );
-};
-
-export default Login;
+}
