@@ -9,7 +9,7 @@ const Login = () => {
 
   useEffect(() => {
     async () => {
-      const res = getProviders().then((res) => {
+      const res = await getProviders().then((res) => {
         return res;
       });
       setProviders(res);
