@@ -1,18 +1,19 @@
-'use client';
+// 'use client';
 
 import { getProviders, signIn } from 'next-auth/react';
 import ProviderOnClickButton from '../components/ProviderOnClickButton';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 
-const Login = () => {
-  const [providers, setProviders] = useState<any>(null);
+const Login = async () => {
+  // const [providers, setProviders] = useState<any>(null);
+  const providers = await getProviders();
 
-  useEffect(() => {
-    (async () => {
-      const res = await getProviders();
-      setProviders(res);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const res = await getProviders();
+  //     setProviders(res);
+  //   })();
+  // }, []);
 
   return (
     <div className="flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8">
