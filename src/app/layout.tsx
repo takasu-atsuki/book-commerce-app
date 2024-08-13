@@ -24,7 +24,6 @@ export default function RootLayout({
       <body className={notoSansJP.className}>
         <NextAuthProvider>
           <Header />
-          {/* <Suspense fallback={<Loading />}>{children}</Suspense> */}
           {children}
         </NextAuthProvider>
       </body>
