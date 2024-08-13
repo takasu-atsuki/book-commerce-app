@@ -23,7 +23,7 @@ async function Header() {
             ホーム
           </Link>
           <Link
-            href={user ? '/profile' : '/api/auth/signin'}
+            href={user ? '/profile' : '/login'}
             className="text-gray-300
             hover:text-white
             px-3
