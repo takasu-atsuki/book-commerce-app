@@ -1,10 +1,23 @@
+'use client';
+
 import { getProviders, signIn } from 'next-auth/react';
 import ProviderOnClickButton from '../components/ProviderOnClickButton';
+import { useEffect, useState } from 'react';
 
-async function Login() {
-  const providers = await getProviders().then((res) => {
-    return res;
-  });
+const Login = () => {
+  const [providers, setProviders] = useState<any>(null);
+
+  useEffect(() => {
+    async () => {
+      const res = getProviders().then((res) => {
+        return res;
+      });
+      setProviders(res);
+    };
+    // const providers = await getProviders().then((res) => {
+    //   return res;
+    // });
+  }, []);
 
   return (
     <div className="flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8">
@@ -16,7 +29,7 @@ async function Login() {
         </div>
         <div className="mt-8 space-y-6">
           {providers &&
-            Object.values(providers).map((provider) => {
+            Object.values(providers).map((provider: any) => {
               return (
                 <div className="text-center" key={provider.id}>
                   <ProviderOnClickButton provider={provider} />
@@ -27,6 +40,6 @@ async function Login() {
       </div>
     </div>
   );
-}
+};
 
 export default Login;
