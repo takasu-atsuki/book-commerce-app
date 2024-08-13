@@ -6,7 +6,13 @@ import ProviderOnClickButton from '../components/ProviderOnClickButton';
 
 export default async function Login() {
   // const [providers, setProviders] = useState<any>(null);
-  const providers = await getProviders();
+  let providers: any = await getProviders();
+
+  // (async () => {
+  //   providers = await getProviders();
+  // })();
+
+  console.log(providers);
 
   // useEffect(() => {
   //   (async () => {
@@ -25,14 +31,15 @@ export default async function Login() {
         </div>
         <div className="mt-8 space-y-6">
           <h1>プロバーダーズはこちら</h1>
-          {Object.values(providers!).map((provider: any) => {
-            return (
-              <div className="text-center" key={provider.id}>
-                <h2>あるはず。。。。</h2>
-                <ProviderOnClickButton provider={provider} />
-              </div>
-            );
-          })}
+          {providers &&
+            Object.values(providers!).map((provider: any) => {
+              return (
+                <div className="text-center" key={provider.id}>
+                  <h2>あるはず。。。。</h2>
+                  <ProviderOnClickButton provider={provider} />
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>
