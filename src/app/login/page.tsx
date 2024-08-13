@@ -8,12 +8,12 @@ const Login = () => {
   const [providers, setProviders] = useState<any>(null);
 
   useEffect(() => {
-    async () => {
+    (async () => {
       const res = await getProviders().then((res) => {
         return res;
       });
       setProviders(res);
-    };
+    })();
     // const providers = await getProviders().then((res) => {
     //   return res;
     // });
